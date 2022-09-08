@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/screens/Login.dart';
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class BackgroundScreen extends StatelessWidget {
+  const BackgroundScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

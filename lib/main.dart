@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:predicoin/screens/home.dart';
+import 'package:predicoin/screens/Background.dart';
 
 void main() {
   runApp(MyApp());
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Palette.kToDark,
       ),
-      home: HomeScreen(),
+      home: BackgroundScreen(),
     );
   }
 }
