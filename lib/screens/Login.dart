@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/screens/Signup.dart';
-import 'package:predicoin/screens/Landing.dart';
+import 'package:predicoin/screens/Home.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(onPressed: () {
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                          return LandingPage();
+                          return HomePage();
                         }),
                         );
                       },style: ButtonStyle(

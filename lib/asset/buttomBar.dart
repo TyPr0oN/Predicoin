@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:predicoin/screens/Home.dart';
+import 'package:predicoin/screens/homeBody.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/screens/Predict.dart';
 
@@ -14,7 +14,7 @@ class buttomBar extends StatefulWidget {
 class _buttomBarState extends State<buttomBar> {
   int _selectedIndex = 0;
   List<Widget> pageList = <Widget>[
-    HomePage(),
+    homeBodyPage(),
     BacktestPage(),
     PredictPage(),
   ];
