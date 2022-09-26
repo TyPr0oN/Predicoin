@@ -13,28 +13,23 @@ class ChartFilter extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: [
           TextButton(onPressed: onPressed, child: Text(
-              "1H",
+              "TIME",
             style: TextStyle(color: Color(0xFFffd030)),
             ),
           ),
           TextButton(onPressed: onPressed, child: Text(
-              "1D"
+              "1W",
+            style: TextStyle(color: Colors.white),
             ),
           ),
           TextButton(onPressed: onPressed, child: Text(
-              "1W"
+              "1M",
+            style: TextStyle(color: Colors.white),
             ),
           ),
           TextButton(onPressed: onPressed, child: Text(
-              "1M"
-            ),
-          ),
-          TextButton(onPressed: onPressed, child: Text(
-              "1Y"
-            ),
-          ),
-          TextButton(onPressed: onPressed, child: Text(
-              "ALL"
+              "ALL",
+            style: TextStyle(color: Colors.white),
             ),
           ),
         ],

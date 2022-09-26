@@ -8,31 +8,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(onPressed: SearchAction,
-
-            color: Color(0xFFffd030), icon: Icon(Icons.search),
-          ),
-          IconButton(onPressed: (){},
-            color: Color(0xFFffd030), icon: Icon(Icons.account_circle),
-          ),
-          IconButton(onPressed: (){},
-            color: Color(0xFFffd030), icon: Icon(Icons.notifications),
-          ),
-        ],
-      ),
+      appBar: buildAppBar(context),
       body: buttomBar(),
     );
   }
-}
-
-void SearchAction() {
-  setState(() {
-    print("Search");
-  });
-}
-
-void setState(Null Function() param0) {
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(
+      centerTitle: true,
+      title: Image.asset('assets/logo/predicoin.png',height: 37,),
+    );
+  }
 }

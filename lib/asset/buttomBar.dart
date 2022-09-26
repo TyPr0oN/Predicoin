@@ -3,7 +3,6 @@ import 'package:predicoin/screens/homeBody.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/screens/Predict.dart';
 
-
 class buttomBar extends StatefulWidget {
   const buttomBar({Key? key}) : super(key: key);
 
