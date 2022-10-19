@@ -71,23 +71,6 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(padding: const EdgeInsets.only(),
-                child: Text(
-                  'Or',
-                  style: TextStyle(color: Colors.black45,fontWeight: FontWeight.bold, fontFamily: 'Ruda', fontSize: 25),
-                ),
-              ),
-              Padding(padding: EdgeInsets.all(40),
-                child: ElevatedButton.icon(onPressed: (){
-
-                },style: ElevatedButton.styleFrom(primary: Colors.white),
-                  icon: Icon(Icons.g_mobiledata, color: Colors.black,),
-                  label: Text(
-                    'Sign in with google',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                ),
-              ),
             ],
           ),
         ),

@@ -89,7 +89,7 @@ class _BacktestPageState extends State<BacktestPage> {
         ));
   }
   String? _strategiesval;
-  List listStrategiesItem = ["BUY AND HOLD", "DOLLAR COST",];
+  List listStrategiesItem = ["Buy and Hold","Dollar Cost Average","Maximum Drawdown","Bollinger Band","Moving Average Convergence Divergence","Simple Moving Average",];
   Widget _buildStrategiesField() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -115,6 +115,23 @@ class _BacktestPageState extends State<BacktestPage> {
                   setState(() {
                     _strategiesval = newValue as String?;
                   });
+                  if(newValue == "Buy and Hold"){
+                    setState(() {
+                      FUND = true;
+                      dollarCost = false;
+                    });
+                  }else if(newValue == "Dollar Cost Average"){
+                    setState(() {
+                      FUND = false;
+                      dollarCost = true;
+                    });
+                  }
+                  else{
+                    setState(() {
+                      FUND = true;
+                      dollarCost = false;
+                    });
+                  };
                 },
                 items: listStrategiesItem.map((valueItem) {
                   return DropdownMenuItem(
@@ -127,6 +144,64 @@ class _BacktestPageState extends State<BacktestPage> {
           ),
         ));
   }
+  String? _strategiesval2;
+  List listStrategiesItem2 = ["BUY AND HOLD", "DOLLAR COST",];
+  Widget _buildStrategiesField2() {
+    return Container(
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Container(
+
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.grey, width: 1),
+                  borderRadius: BorderRadius.circular(15)),
+              child: DropdownButton(
+                hint: Text(""),
+                icon: Icon(Icons.arrow_drop_down),
+                iconSize: 36,
+                isExpanded: true,
+                underline: SizedBox(),
+                style: TextStyle(color: Colors.black, fontSize: 22),
+                value: _strategiesval2,
+                onChanged: (newValue) {
+                  setState(() {
+                    _strategiesval2 = newValue as String?;
+                  });
+                  if(newValue == "BUY AND HOLD"){
+                    setState(() {
+                      FUND = true;
+                    });
+                  }else if(newValue == "DOLLAR COST"){
+                    setState(() {
+                      dollarCost = true;
+                    });
+                  }
+                  else{
+                    setState(() {
+                      FUND = true;
+                      dollarCost = false;
+                    });
+                  };
+                },
+                items: listStrategiesItem2.map((valueItem) {
+                  return DropdownMenuItem(
+                    value: valueItem,
+                    child: Text(valueItem),
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
+        ));
+  }
+
+  bool FUND = false;
+  bool dollarCost = false;
+  bool compareStrategies = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,35 +256,122 @@ class _BacktestPageState extends State<BacktestPage> {
                         ),
                       ),
                       _buildMetricField2(),
-                      Container(
-                        child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
-                          child: Text(
-                            'STRATEGIES',
-                            style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                      Row(
+                        children: [
+                          Container(
+                            child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                              child: Text(
+                                'STRATEGIES',
+                                style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                              ),
+                            ),
                           ),
-                        ),
+                          Container(
+                            child: Padding(padding: EdgeInsets.only(top: 20),
+                              child: IconButton(
+                                onPressed: () {
+                                  setState(() {
+                                    compareStrategies = true;
+                                  });
+                                },
+                                icon: Icon(Icons.add),
+                                color: Colors.yellow,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                       _buildStrategiesField(),
-                      Container(
-                        child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
-                          child: Text(
-                            'FUND',
-                            style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                      Visibility(
+                          visible: compareStrategies,
+                          child: _buildStrategiesField2(),
+                      ),
+                      Visibility(
+                        visible: FUND,
+                        child: Container(
+                          child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                            child: Text(
+                              'FUND',
+                              style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                            ),
                           ),
                         ),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(color: Colors.black, width: 3)
+                      Visibility(
+                        visible: FUND,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: Colors.black, width: 3)
+                                ),
+                                labelText: 'FUND',
                               ),
-                              labelText: 'FUND',
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: dollarCost,
+                        child: Container(
+                          child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                            child: Text(
+                              'STARTING PRINCIPAL',
+                              style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: dollarCost,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: Colors.black, width: 3)
+                                ),
+                                labelText: 'STARTING PRINCIPAL',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: dollarCost,
+                        child: Container(
+                          child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                            child: Text(
+                              'MONTHLY ADD',
+                              style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: dollarCost,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: Colors.black, width: 3)
+                                ),
+                                labelText: 'MONTHLY ADD',
+                              ),
                             ),
                           ),
                         ),

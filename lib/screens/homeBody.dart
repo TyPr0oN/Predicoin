@@ -72,17 +72,23 @@ class homeBodyPage extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("200",style: TextStyle(fontSize: 18, color: Colors.white,),)
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("200",style: TextStyle(fontSize: 18, color: Colors.white,),)
+                                ],
+                              ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("-1.8",style: TextStyle(fontSize: 18, color: Colors.white,),)
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("-1.8",style: TextStyle(fontSize: 18, color: Colors.white,),)
+                                ],
+                              ),
                             )
                           ],
                         ),

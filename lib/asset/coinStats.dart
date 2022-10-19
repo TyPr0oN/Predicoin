@@ -15,7 +15,7 @@ class CoinStats extends StatelessWidget {
           children: [
             Stat(title: "High", value: "฿32.23"),
             Container(width: 30,),
-            Stat(title: "Symbol", value: "BTC"),
+            Stat(title: "Currency", value: "BTC"),
           ],
         ),
         Row(

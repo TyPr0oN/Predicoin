@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/screens/Login.dart';
+import 'package:predicoin/screens/Home.dart';
 class BackgroundScreen extends StatelessWidget {
   const BackgroundScreen({Key? key}) : super(key: key);
 
@@ -27,17 +28,17 @@ class BackgroundScreen extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(onPressed: () {
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                  return LoginPage();
+                  return HomePage();
                 }),
                 );
               },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
+                  backgroundColor: MaterialStateProperty.all(Color(0xff2D3035)),
                 ),
-                child: const Text('Sign in',
-                  style: TextStyle(color: Colors.black,
+                child: const Text('Start',
+                  style: TextStyle(color: Colors.white,
                     fontSize: 20,
                   ),),
               ),

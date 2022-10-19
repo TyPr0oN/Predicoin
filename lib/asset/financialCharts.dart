@@ -12,8 +12,6 @@ class AssetFinancialChart extends StatefulWidget {
 class _AssetFinancialChartState extends State<AssetFinancialChart> {
   late List<ChartSampleData> _chartData;
   late TrackballBehavior _trackballBehavior;
-  late TooltipBehavior _tooltipBehavior;
-  late ZoomPanBehavior _zoomPanBehavior;
   
   @override
   void initState() {

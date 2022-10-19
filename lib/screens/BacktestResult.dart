@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/asset/priceChart.dart';
+import 'package:predicoin/asset/acdisChart.dart';
+import 'package:predicoin/asset/lnChart.dart';
 
 class BacktestResultPage extends StatefulWidget {
   const BacktestResultPage({Key? key}) : super(key: key);
@@ -187,7 +189,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Container(
-                        height: 250,
+                        height: 340,
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           children: [
@@ -196,7 +198,9 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                 top: 30,
                                 bottom: 10,
                               ),
-                              child: AssetPriceChart(lineColor: Colors.blue,),
+                              // child: AssetPriceChart(lineColor: Colors.blue,),
+                              // child: AssetAcdisChart(),
+                              child: AssetLineChart(),
                             ),
                             ),
                           ],
