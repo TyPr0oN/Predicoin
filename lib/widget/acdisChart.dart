@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class AssetAcdisChart extends StatefulWidget {
-  const AssetAcdisChart({Key? key}) : super(key: key);
+class WidgetAcdisChart extends StatefulWidget {
+  const WidgetAcdisChart({Key? key}) : super(key: key);
 
   @override
-  _AssetAcdisChartState createState() => _AssetAcdisChartState();
+  _WidgetAcdisChartState createState() => _WidgetAcdisChartState();
 }
 
-class _AssetAcdisChartState extends State<AssetAcdisChart> {
+class _WidgetAcdisChartState extends State<WidgetAcdisChart> {
   List<ChartSampleData> chartData = <ChartSampleData>[
     ChartSampleData(
         x: DateTime(2016, 01, 01),

@@ -394,7 +394,7 @@ class _BacktestPageState extends State<BacktestPage> {
                     width: 90, //MediaQuery.of(context).size.width
                   ),
                   child: TextButton(
-                    child: Text("Create", style: TextStyle(fontSize: 24),),
+                    child: Text("Create", style: TextStyle(color: Color(0xff2D3035),fontSize: 24),),
                       style: ElevatedButton.styleFrom(primary: Color(0xFFFFE042),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10)

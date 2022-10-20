@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-class AssetLineChart extends StatefulWidget {
-  const AssetLineChart({Key? key}) : super(key: key);
+class WidgetLineChart extends StatefulWidget {
+  const WidgetLineChart({Key? key}) : super(key: key);
 
   @override
-  _AssetLineChartState createState() => _AssetLineChartState();
+  _WidgetLineChartState createState() => _WidgetLineChartState();
 }
 
-class _AssetLineChartState extends State<AssetLineChart> {
+class _WidgetLineChartState extends State<WidgetLineChart> {
   late List<SalesData> _chartData;
   late TooltipBehavior _tooltipBehavior;
   late TrackballBehavior _trackballBehavior;

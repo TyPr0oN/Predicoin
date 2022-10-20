@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:predicoin/provider/predictFeed.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/PredictResult.dart';
+import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
+
 class PredictPage extends StatefulWidget {
   const PredictPage({Key? key}) : super(key: key);
 
@@ -9,6 +13,22 @@ class PredictPage extends StatefulWidget {
 }
 
 class _PredictPageState extends State<PredictPage> {
+  Future<void> fetchAllRequest(BuildContext context) async {
+    try {
+      await Provider.of<PredictBtcFeed>(context, listen: false).fetchRequest();
+    } on DioError catch (e) {
+      print('error');
+      print(e);
+      print(e.response);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllRequest(context);
+  }
+
   String? _assetval;
   List listAssetItem = ["BTC", "ETH", "ADA"];
   Widget _buildAssetField() {
@@ -47,8 +67,12 @@ class _PredictPageState extends State<PredictPage> {
           ),
         ));
   }
+
   String? _metricval2;
-  List listMetricItem2 = ["CANDLESTICK", "GRAPH",];
+  List listMetricItem2 = [
+    "CANDLESTICK",
+    "GRAPH",
+  ];
   Widget _buildMetricField2() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -85,6 +109,7 @@ class _PredictPageState extends State<PredictPage> {
           ),
         ));
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -100,41 +125,61 @@ class _PredictPageState extends State<PredictPage> {
                     children: [
                       Row(
                         children: [
-                          Padding(padding: EdgeInsets.all(1),
-                            child: ElevatedButton.icon(onPressed: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                                return HomePage();
-                              }),
-                              );
-                            },style: ButtonStyle(
-                              // shape: MaterialStateProperty.all(
-                              //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-                              backgroundColor: MaterialStateProperty.all(Color(0xFF2D3035)),
-                            ), icon: Icon(Icons.chevron_left), label: Text(''),
+                          Padding(
+                            padding: EdgeInsets.all(1),
+                            child: ElevatedButton.icon(
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    return HomePage();
+                                  }),
+                                );
+                              },
+                              style: ButtonStyle(
+                                // shape: MaterialStateProperty.all(
+                                //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xFF2D3035)),
+                              ),
+                              icon: Icon(Icons.chevron_left),
+                              label: Text(''),
                             ),
                           ),
-                          Padding(padding: const EdgeInsets.all(1),
+                          Padding(
+                            padding: const EdgeInsets.all(1),
                             child: Text(
                               'Predict',
-                              style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Colors.white),
+                              style: TextStyle(
+                                  fontFamily: 'Ruda',
+                                  fontSize: 25,
+                                  color: Colors.white),
                             ),
                           ),
                         ],
                       ),
                       Container(
-                        child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20, left: 10),
                           child: Text(
                             'Asset',
-                            style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                            style: TextStyle(
+                                fontFamily: 'Ruda',
+                                fontSize: 25,
+                                color: Color(0xFFffd030)),
                           ),
                         ),
                       ),
                       _buildAssetField(),
                       Container(
-                        child: Padding(padding: const EdgeInsets.only(top: 20,left: 10),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20, left: 10),
                           child: Text(
                             'METRIC',
-                            style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                            style: TextStyle(
+                                fontFamily: 'Ruda',
+                                fontSize: 25,
+                                color: Color(0xFFffd030)),
                           ),
                         ),
                       ),
@@ -157,16 +202,21 @@ class _PredictPageState extends State<PredictPage> {
                     width: MediaQuery.of(context).size.width, //90
                   ),
                   child: TextButton(
-                    child: Text("Create", style: TextStyle(fontSize: 24),),
-                    style: ElevatedButton.styleFrom(primary: Color(0xFFFFE042),
+                    child: Text(
+                      "Create",
+                      style: TextStyle(color: Color(0xff2D3035),fontSize: 24),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFFFFE042),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)
-                      ),
+                          borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: () async {
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
-                        return PredictResultPage();
-                      }),
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return PredictResultPage();
+                        }),
                       );
                     },
                   ),
@@ -174,8 +224,8 @@ class _PredictPageState extends State<PredictPage> {
               ),
             ),
           ],
-          ),
         ),
+      ),
     );
   }
 }

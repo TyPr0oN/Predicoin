@@ -12,9 +12,10 @@ class HomePage extends StatelessWidget {
       body: buttomBar(),
     );
   }
+
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      centerTitle: true,
+      centerTitle: true,backgroundColor: Color(0xff1D194B),
       title: Image.asset('assets/logo/predicoin.png',height: 37,),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/asset/priceChart.dart';
-import 'package:predicoin/asset/financialCharts.dart';
+import 'package:predicoin/Widget/financialCharts.dart';
 
 class PredictResultPage extends StatefulWidget {
   const PredictResultPage({Key? key}) : super(key: key);
@@ -193,7 +193,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                               top: 30,
                               bottom: 10,
                             ),
-                            child: AssetFinancialChart(), //AssetPriceChart(lineColor: Colors.blue,),
+                            child: WidgetFinancialChart(), //AssetPriceChart(lineColor: Colors.blue,),
                           ),
                           ),
                         ],
