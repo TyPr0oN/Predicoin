@@ -1,14 +1,12 @@
+import 'package:predicoin/provider/predictvalue.dart';
+
 class predictBtcList {
   predictBtcList({
-    this.name,
-    this.id,
-    this.value,
-    this.y2,
-    this.rmse,
+    this.name = '',
+    this.rmse = 0,
+    this.predictvaluelist = const [],
   });
   final String? name;
-  final double? id;
-  final double? value;
-  final double? y2;
   final double? rmse;
+  final List<PredictValue> predictvaluelist;
 }
