@@ -12,7 +12,7 @@ class WidgetFinancialChart extends StatefulWidget {
 class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
   late List<ChartSampleData> _chartData;
   late TrackballBehavior _trackballBehavior;
-  
+
   @override
   void initState() {
     _chartData = getChartData();
@@ -39,14 +39,12 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
           ],
           primaryXAxis: DateTimeAxis(
               dateFormat: DateFormat.MMM(),
-              majorGridLines: MajorGridLines(width: 0)
-          ),
+              majorGridLines: MajorGridLines(width: 0)),
           primaryYAxis: NumericAxis(
               minimum: 70,
               maximum: 130,
               interval: 10,
-              numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0)
-          ),
+              numberFormat: NumberFormat.simpleCurrency(decimalDigits: 0)),
         ),
       ),
     );

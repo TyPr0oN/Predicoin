@@ -23,14 +23,9 @@ class _PredictPageState extends State<PredictPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fetchAllRequest(context);
-  }
-
   String? _assetval;
   List listAssetItem = ["BTC", "ETH", "ADA"];
+  String listedValue = '';
   Widget _buildAssetField() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -58,6 +53,7 @@ class _PredictPageState extends State<PredictPage> {
                 },
                 items: listAssetItem.map((valueItem) {
                   return DropdownMenuItem(
+                    onTap: () => listedValue = valueItem,
                     value: valueItem,
                     child: Text(valueItem),
                   );
@@ -204,7 +200,7 @@ class _PredictPageState extends State<PredictPage> {
                   child: TextButton(
                     child: Text(
                       "Create",
-                      style: TextStyle(color: Color(0xff2D3035),fontSize: 24),
+                      style: TextStyle(color: Color(0xff2D3035), fontSize: 24),
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: Color(0xFFFFE042),
@@ -212,6 +208,13 @@ class _PredictPageState extends State<PredictPage> {
                           borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: () async {
+                      switch (listedValue) {
+                        case 'BTC':
+                          print('hello');
+                          fetchAllRequest(context);
+                          break;
+                        default:
+                      }
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(builder: (context) {
