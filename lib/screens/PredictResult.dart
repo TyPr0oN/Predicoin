@@ -20,8 +20,8 @@ class _PredictResultPageState extends State<PredictResultPage> {
       btcPredict = await Provider.of<PredictBtcFeed>(context, listen: false)
           .fetchRequest();
 
-      print(btcPredict[1]['name'] + 'test');
-      print(btcPredict[0]['16']['next_predicted_days_value']);
+      //print(btcPredict[1]['name'] + 'test');
+      //print(btcPredict[0]['16']['next_predicted_days_value']);
     } catch (err) {
       print(err);
     }
@@ -126,8 +126,9 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                         top: 30,
                                         bottom: 10,
                                       ),
-                                      child:
-                                          WidgetFinancialChart(), //AssetPriceChart(lineColor: Colors.blue,),
+                                      child: WidgetFinancialChart(
+                                          btcPredict:
+                                              btcPredict), //AssetPriceChart(lineColor: Colors.blue,),
                                     ),
                                   ),
                                 ],
