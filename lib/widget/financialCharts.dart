@@ -20,9 +20,7 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
   @override
   void initState() {
     for (var i = 16; i < widget.btcPredict[0].length; i++) {
-      print(double.parse(widget.btcPredict[0][i.toString()]
-              ['next_predicted_days_value']
-          .toString()));
+      //print(double.parse(widget.btcPredict[0][i.toString()]['next_predicted_days_value'].toString()));
       chartData.add(ChartData(
           i - 15,
           double.parse(widget.btcPredict[0][i.toString()]
