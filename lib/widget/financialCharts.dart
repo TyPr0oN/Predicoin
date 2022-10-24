@@ -15,7 +15,7 @@ class WidgetFinancialChart extends StatefulWidget {
 
 class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
   //late List<ChartSampleData> _chartData;
-
+  late TrackballBehavior _trackballBehavior;
   final List<ChartData> chartData = [];
   @override
   void initState() {
@@ -27,6 +27,9 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
                   ['next_predicted_days_value']
               .toString())));
     }
+    _trackballBehavior = TrackballBehavior(
+        enable: true, activationMode: ActivationMode.singleTap);
+    super.initState();
   }
 
   @override
@@ -34,6 +37,7 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
     return SafeArea(
       child: Scaffold(
         body: SfCartesianChart(
+          trackballBehavior: _trackballBehavior,
           primaryXAxis: NumericAxis(),
           primaryYAxis: NumericAxis(),
           series: <ChartSeries>[

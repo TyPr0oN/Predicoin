@@ -13,7 +13,7 @@ class buttomBar extends StatefulWidget {
 class _buttomBarState extends State<buttomBar> {
   int _selectedIndex = 0;
   List<Widget> pageList = <Widget>[
-    homeBodyPage(),
+    HomeBodyPage(),
     BacktestPage(),
     PredictPage(),
   ];
@@ -24,7 +24,7 @@ class _buttomBarState extends State<buttomBar> {
       body: pageList[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
-        onTap: (value){
+        onTap: (value) {
           setState(() {
             _selectedIndex = value;
           });
@@ -35,15 +35,11 @@ class _buttomBarState extends State<buttomBar> {
         unselectedItemColor: Color(0xFFffd030),
         iconSize: 40,
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),
-            label: 'Home'
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.multiline_chart),
-            label: 'BackTest'
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart),
-            label: 'Predict'
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.multiline_chart), label: 'BackTest'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart), label: 'Predict'),
         ],
       ),
     );
