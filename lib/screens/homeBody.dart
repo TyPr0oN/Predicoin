@@ -195,7 +195,8 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                 ),
                                 Container(
                                     height: 50,
-                                    child: Text('+1.43%',
+                                    child: Text(
+                                        '${(double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
                                         style: TextStyle(
                                             fontSize: 18,
                                             color: Colors.white))),
