@@ -2,8 +2,31 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CoinStats extends StatelessWidget {
-  const CoinStats({Key? key}) : super(key: key);
+class CoinStats extends StatefulWidget {
+  const CoinStats({
+    Key? key,
+    required this.coinInfo,
+    this.btcPredict,
+  }) : super(key: key);
+  final dynamic btcPredict;
+  final dynamic coinInfo;
+  @override
+  State<CoinStats> createState() => _CoinStatsState();
+}
+
+class _CoinStatsState extends State<CoinStats> {
+  final List<String> dayValues = [];
+  var today;
+  @override
+  void initState() {
+    // print(coinInfo[0]);
+    for (var i = 0; i < widget.coinInfo[0].length; i++) {
+      // print((widget.coinInfo[0][i.toString()]['Date'].toString()));
+      dayValues.add((widget.coinInfo[0][i.toString()]['Date'].toString()));
+    }
+    today = dayValues.length - 1;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,25 +36,31 @@ class CoinStats extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "High", value: "฿32.23"),
-            Container(width: 30,),
-            Stat(title: "Currency", value: "BTC"),
+            Stat(title: "High", value: '${double.parse(widget.coinInfo[0]["$today"]['High'].toString()).toStringAsFixed(3)} \$'),
+            Container(
+              width: 30,
+            ),
+            Stat(title: "Currency", value: widget.coinInfo[1]['name']),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "Low", value: "฿31.23"),
-            Container(width: 30,),
-            Stat(title: "Rank", value: "8"),
+            Stat(title: "Low", value: '${double.parse(widget.coinInfo[0]["$today"]['Low'].toString()).toStringAsFixed(3)} \$'),
+            Container(
+              width: 30,
+            ),
+            Stat(title: "Close", value: '${double.parse(widget.coinInfo[0]["$today"]['Close'].toString()).toStringAsFixed(3)} \$'),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "24h vol.", value: "฿3.28K"),
-            Container(width: 30,),
-            Stat(title: "Mkt cap", value: "฿30.2K"),
+            Stat(title: "Open", value: '${double.parse(widget.coinInfo[0]["$today"]['Open'].toString()).toStringAsFixed(3)} \$'),
+            Container(
+              width: 30,
+            ),
+            Stat(title: "24hchange", value: '${double.parse(widget.coinInfo[0]["$today"]['24hchange'].toString()).toStringAsFixed(3)} \$'),
           ],
         ),
       ],
@@ -59,8 +88,7 @@ class Stat extends StatelessWidget {
             ),
           ),
         ),
-        child:
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             title,
             style: TextStyle(

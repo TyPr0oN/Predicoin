@@ -12,26 +12,28 @@ class ChartFilter extends StatelessWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          TextButton(onPressed: onPressed, child: Text(
-              "TIME",
-            style: TextStyle(color: Color(0xFFffd030)),
+          TextButton(
+            onPressed: onPressed,
+            child: Text(
+              "TODAY",
+              style: TextStyle(color: Color(0xFFffd030)),
             ),
           ),
-          TextButton(onPressed: onPressed, child: Text(
-              "1W",
-            style: TextStyle(color: Colors.white),
-            ),
-          ),
-          TextButton(onPressed: onPressed, child: Text(
-              "1M",
-            style: TextStyle(color: Colors.white),
-            ),
-          ),
-          TextButton(onPressed: onPressed, child: Text(
-              "ALL",
-            style: TextStyle(color: Colors.white),
-            ),
-          ),
+          // TextButton(onPressed: onPressed, child: Text(
+          //     "1W",
+          //   style: TextStyle(color: Colors.white),
+          //   ),
+          // ),
+          // TextButton(onPressed: onPressed, child: Text(
+          //     "1M",
+          //   style: TextStyle(color: Colors.white),
+          //   ),
+          // ),
+          // TextButton(onPressed: onPressed, child: Text(
+          //     "ALL",
+          //   style: TextStyle(color: Colors.white),
+          //   ),
+          // ),
         ],
       ),
     );
