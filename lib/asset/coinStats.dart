@@ -60,7 +60,7 @@ class _CoinStatsState extends State<CoinStats> {
             Container(
               width: 30,
             ),
-            Stat(title: "24hchange", value: '${double.parse(widget.coinInfo[0]["$today"]['24hchange'].toString()).toStringAsFixed(3)} \$'),
+            Stat(title: "24hchange", value: '${double.parse(widget.coinInfo[0]["$today"]['24hchange'].toString()).toStringAsFixed(3)} \%'),
           ],
         ),
       ],
