@@ -21,6 +21,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
           .fetchRequest();
 
       //print(btcPredict[1]['name'] + 'test');
+      //print(btcPredict[0][0]);
       //print(btcPredict[0]['16']['next_predicted_days_value']);
     } catch (err) {
       print(err);
@@ -258,7 +259,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['16']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][365]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -270,7 +271,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['17']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][366]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -282,7 +283,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['18']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][367]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -294,7 +295,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['19']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][368]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -306,7 +307,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['20']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][369]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -318,7 +319,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['21']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][370]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -330,7 +331,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
-                                          '${double.parse((btcPredict[0]['22']['next_predicted_days_value']).toString()).toStringAsFixed(2)} USD',
+                                          '${double.parse((btcPredict[0][371]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,

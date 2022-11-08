@@ -15,20 +15,26 @@ class WidgetFinancialChart extends StatefulWidget {
 
 class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
   //late List<ChartSampleData> _chartData;
-  late TrackballBehavior _trackballBehavior;
+
   final List<ChartData> chartData = [];
+  final List<ChartDataPredict> predictData = [];
   @override
   void initState() {
-    for (var i = 16; i < widget.btcPredict[0].length; i++) {
+    for (var i = 0; i < widget.btcPredict[0].length; i++) {
+      //print(widget.btcPredict[0][0]);
       //print(double.parse(widget.btcPredict[0][i.toString()]['next_predicted_days_value'].toString()));
       chartData.add(ChartData(
-          i - 15,
-          double.parse(widget.btcPredict[0][i.toString()]
-                  ['next_predicted_days_value']
-              .toString())));
+          widget.btcPredict[0][i]['date'].toString(),
+          double.tryParse(
+              widget.btcPredict[0][i]['original_close'].toString())));
     }
-    _trackballBehavior = TrackballBehavior(
-        enable: true, activationMode: ActivationMode.singleTap);
+    for (var i = 0; i < widget.btcPredict[0].length; i++) {
+      predictData.add(ChartDataPredict(
+          widget.btcPredict[0][i]['date'].toString(),
+          double.tryParse(
+              widget.btcPredict[0][i]['test_predicted_close'].toString())));
+    }
+
     super.initState();
   }
 
@@ -37,14 +43,26 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
     return SafeArea(
       child: Scaffold(
         body: SfCartesianChart(
-          trackballBehavior: _trackballBehavior,
-          primaryXAxis: NumericAxis(),
+          trackballBehavior: TrackballBehavior(
+            enable: true,
+            activationMode: ActivationMode.singleTap,
+            builder: (context, trackballDetails) => Container(
+              child: Text(
+                  "${trackballDetails.point!.x} : ${trackballDetails.point!.y}"),
+            ),
+          ),
+          //tooltipBehavior: TooltipBehavior(enable: true),
+          primaryXAxis: CategoryAxis(),
           primaryYAxis: NumericAxis(),
           series: <ChartSeries>[
-            LineSeries<ChartData, int>(
+            LineSeries<ChartData, String>(
                 dataSource: chartData,
                 xValueMapper: (ChartData data, _) => data.x,
-                yValueMapper: (ChartData data, _) => data.y)
+                yValueMapper: (ChartData data, _) => data.y),
+            LineSeries<ChartDataPredict, String>(
+                dataSource: predictData,
+                xValueMapper: (ChartDataPredict data, _) => data.x,
+                yValueMapper: (ChartDataPredict data, _) => data.y)
           ],
         ),
       ),
@@ -54,6 +72,12 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChart> {
 
 class ChartData {
   ChartData(this.x, this.y);
-  final int x;
-  final double y;
+  final String x;
+  final double? y;
+}
+
+class ChartDataPredict {
+  ChartDataPredict(this.x, this.y);
+  final String x;
+  final double? y;
 }
