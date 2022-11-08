@@ -36,7 +36,10 @@ class _CoinStatsState extends State<CoinStats> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "High", value: '${double.parse(widget.coinInfo[0]["$today"]['High'].toString()).toStringAsFixed(3)} \$'),
+            Stat(
+                title: "High",
+                value:
+                    '${double.parse(widget.coinInfo[0]["$today"]['High'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
@@ -46,21 +49,33 @@ class _CoinStatsState extends State<CoinStats> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "Low", value: '${double.parse(widget.coinInfo[0]["$today"]['Low'].toString()).toStringAsFixed(3)} \$'),
+            Stat(
+                title: "Low",
+                value:
+                    '${double.parse(widget.coinInfo[0]["$today"]['Low'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
-            Stat(title: "Close", value: '${double.parse(widget.coinInfo[0]["$today"]['Close'].toString()).toStringAsFixed(3)} \$'),
+            Stat(
+                title: "Close",
+                value:
+                    '${double.parse(widget.coinInfo[0]["$today"]['Close'].toString()).toStringAsFixed(2)} \$'),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stat(title: "Open", value: '${double.parse(widget.coinInfo[0]["$today"]['Open'].toString()).toStringAsFixed(3)} \$'),
+            Stat(
+                title: "Open",
+                value:
+                    '${double.parse(widget.coinInfo[0]["$today"]['Open'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
-            Stat(title: "24hchange", value: '${double.parse(widget.coinInfo[0]["$today"]['24hchange'].toString()).toStringAsFixed(3)} \%'),
+            Stat(
+                title: "24hchange",
+                value:
+                    '${(double.parse((widget.coinInfo[0]['${widget.coinInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %'),
           ],
         ),
       ],
@@ -71,7 +86,8 @@ class _CoinStatsState extends State<CoinStats> {
 class Stat extends StatelessWidget {
   final String title;
   final String value;
-  const Stat({Key? key, required this.title, required this.value}) : super(key: key);
+  const Stat({Key? key, required this.title, required this.value})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +104,8 @@ class Stat extends StatelessWidget {
             ),
           ),
         ),
-        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             title,
             style: TextStyle(
