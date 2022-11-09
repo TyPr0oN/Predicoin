@@ -1,5 +1,4 @@
 // can import asset as backend api for stats
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CoinStats extends StatefulWidget {
@@ -20,11 +19,7 @@ class _CoinStatsState extends State<CoinStats> {
   @override
   void initState() {
     // print(coinInfo[0]);
-    for (var i = 0; i < widget.coinInfo[0].length; i++) {
-      // print((widget.coinInfo[0][i.toString()]['Date'].toString()));
-      dayValues.add((widget.coinInfo[0][i.toString()]['Date'].toString()));
-    }
-    today = dayValues.length - 1;
+    today = widget.coinInfo[0].length - 1;
     super.initState();
   }
 
@@ -38,8 +33,7 @@ class _CoinStatsState extends State<CoinStats> {
           children: [
             Stat(
                 title: "High",
-                value:
-                    '${double.parse(widget.coinInfo[0]["$today"]['High'].toString()).toStringAsFixed(2)} \$'),
+                value: '${double.parse(widget.coinInfo[0]["$today"]['High'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
@@ -51,15 +45,13 @@ class _CoinStatsState extends State<CoinStats> {
           children: [
             Stat(
                 title: "Low",
-                value:
-                    '${double.parse(widget.coinInfo[0]["$today"]['Low'].toString()).toStringAsFixed(2)} \$'),
+                value: '${double.parse(widget.coinInfo[0]["$today"]['Low'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
             Stat(
                 title: "Close",
-                value:
-                    '${double.parse(widget.coinInfo[0]["$today"]['Close'].toString()).toStringAsFixed(2)} \$'),
+                value: '${double.parse(widget.coinInfo[0]["$today"]['Close'].toString()).toStringAsFixed(2)} \$'),
           ],
         ),
         Row(
@@ -67,8 +59,7 @@ class _CoinStatsState extends State<CoinStats> {
           children: [
             Stat(
                 title: "Open",
-                value:
-                    '${double.parse(widget.coinInfo[0]["$today"]['Open'].toString()).toStringAsFixed(2)} \$'),
+                value: '${double.parse(widget.coinInfo[0]["$today"]['Open'].toString()).toStringAsFixed(2)} \$'),
             Container(
               width: 30,
             ),
@@ -86,8 +77,7 @@ class _CoinStatsState extends State<CoinStats> {
 class Stat extends StatelessWidget {
   final String title;
   final String value;
-  const Stat({Key? key, required this.title, required this.value})
-      : super(key: key);
+  const Stat({Key? key, required this.title, required this.value}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,8 +94,7 @@ class Stat extends StatelessWidget {
             ),
           ),
         ),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             title,
             style: TextStyle(

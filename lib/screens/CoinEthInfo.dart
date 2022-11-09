@@ -1,33 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:predicoin/screens/coinInfoBody.dart';
-import 'package:predicoin/screens/Backtest.dart';
-import 'package:predicoin/screens/Predict.dart';
-import 'package:predicoin/widget/priceChart.dart';
+import 'package:predicoin/screens/homeBody.dart';
+import 'package:predicoin/asset/buttomBar.dart';
+import 'package:predicoin/widget/coinEthPriceChart.dart';
 import 'package:provider/provider.dart';
 
 import '../asset/chartFillter.dart';
 import '../asset/coinStats.dart';
-import '../provider/coinBtc.dart';
+import '../provider/coinEth.dart';
 import 'Home.dart';
 
-class CoininfoPage extends StatefulWidget {
-  const CoininfoPage({Key? key}) : super(key: key);
+class EthInfoPage extends StatefulWidget {
+  EthInfoPage({Key? key}) : super(key: key);
 
   @override
-  _CoininfoPageState createState() => _CoininfoPageState();
+  State<EthInfoPage> createState() => _EthInfoPageState();
 }
 
-class _CoininfoPageState extends State<CoininfoPage> {
-  dynamic btcInfo = '';
-  Future<dynamic> getBtcInfo(BuildContext context) async {
+class _EthInfoPageState extends State<EthInfoPage> {
+  dynamic ethInfo = '';
+  Future<dynamic> getEthInfo(BuildContext context) async {
     try {
-      //print('hello');
-      btcInfo = await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
-      // print(btcInfo[0]["0"]['Close'] + 'test');
+      ethInfo = await Provider.of<CoinEth>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
-    return btcInfo;
+    return ethInfo;
   }
 
   @override
@@ -36,10 +33,11 @@ class _CoininfoPageState extends State<CoininfoPage> {
       appBar: buildAppBar(context),
       backgroundColor: Color(0xff2D3035),
       body: FutureBuilder(
-        future: getBtcInfo(context),
+        future: getEthInfo(context),
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+            return const Center(
+                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
           } else {
             return Padding(
               padding: const EdgeInsets.only(),
@@ -63,8 +61,6 @@ class _CoininfoPageState extends State<CoininfoPage> {
                                   );
                                 },
                                 style: ButtonStyle(
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
                                   backgroundColor: MaterialStateProperty.all(Color(0xFF2D3035)),
                                 ),
                                 icon: Icon(Icons.chevron_left),
@@ -74,7 +70,7 @@ class _CoininfoPageState extends State<CoininfoPage> {
                             Padding(
                               padding: const EdgeInsets.all(1),
                               child: Text(
-                                'BTC',
+                                'ETH',
                                 style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
                               ),
                             ),
@@ -84,7 +80,7 @@ class _CoininfoPageState extends State<CoininfoPage> {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Container(
-                              height: 250,
+                              height: 300,
                               width: MediaQuery.of(context).size.width,
                               child: Column(
                                 children: [
@@ -94,11 +90,7 @@ class _CoininfoPageState extends State<CoininfoPage> {
                                         top: 30,
                                         bottom: 10,
                                       ),
-                                      // child: AssetPriceChart(
-                                      //   lineColor: Colors.blue,
-                                      //   coinInfo: btcInfo,
-                                      // ),
-                                      child: WidgetPriceChart(coinInfo: btcInfo, lineColor: Colors.blue),
+                                      child: WidgetEthPriceChart(coinInfo: ethInfo, lineColor: Colors.blue),
                                     ),
                                   ),
                                 ],
@@ -115,7 +107,7 @@ class _CoininfoPageState extends State<CoininfoPage> {
                               padding: EdgeInsets.symmetric(
                                 horizontal: 20,
                               ),
-                              child: CoinStats(coinInfo: btcInfo),
+                              child: CoinStats(coinInfo: ethInfo),
                             ),
                           ],
                         ),
