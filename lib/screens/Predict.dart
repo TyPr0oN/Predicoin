@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/provider/predictFeed.dart';
+import 'package:predicoin/provider/predictFeedETH.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/PredictResult.dart';
 import 'package:dio/dio.dart';
+import 'package:predicoin/screens/predictResultEth.dart';
+import 'package:predicoin/screens/predictResultPaxg.dart';
+import 'package:predicoin/screens/predictResultSol.dart';
+import 'package:predicoin/screens/predictResultYfi.dart';
 import 'package:provider/provider.dart';
+
+import '../provider/predictFeedPAXG.dart';
+import '../provider/predictFeedSOL.dart';
+import '../provider/predictFeedYFI.dart';
 
 class PredictPage extends StatefulWidget {
   const PredictPage({Key? key}) : super(key: key);
@@ -13,7 +22,7 @@ class PredictPage extends StatefulWidget {
 }
 
 class _PredictPageState extends State<PredictPage> {
-  Future<void> fetchAllRequest(BuildContext context) async {
+  Future<void> fetchAllRequest() async {
     try {
       await Provider.of<PredictBtcFeed>(context, listen: false).fetchRequest();
     } on DioError catch (e) {
@@ -23,8 +32,48 @@ class _PredictPageState extends State<PredictPage> {
     }
   }
 
+  Future<void> fetchEthRequest() async {
+    try {
+      await Provider.of<PredictEthFeed>(context, listen: false).fetchRequest();
+    } on DioError catch (e) {
+      print('error');
+      print(e);
+      print(e.response);
+    }
+  }
+
+  Future<void> fetchPaxgRequest() async {
+    try {
+      await Provider.of<PredictPaxgFeed>(context, listen: false).fetchRequest();
+    } on DioError catch (e) {
+      print('error');
+      print(e);
+      print(e.response);
+    }
+  }
+
+  Future<void> fetchSolRequest() async {
+    try {
+      await Provider.of<PredictSolFeed>(context, listen: false).fetchRequest();
+    } on DioError catch (e) {
+      print('error');
+      print(e);
+      print(e.response);
+    }
+  }
+
+  Future<void> fetchYfiRequest() async {
+    try {
+      await Provider.of<PredictYfiFeed>(context, listen: false).fetchRequest();
+    } on DioError catch (e) {
+      print('error');
+      print(e);
+      print(e.response);
+    }
+  }
+
   String? _assetval;
-  List listAssetItem = ["BTC", "ETH", "ADA"];
+  List listAssetItem = ["BTC", "ETH", "PAXG", "SOL", "YFI"];
   String listedValue = '';
   Widget _buildAssetField() {
     return Container(
@@ -210,17 +259,58 @@ class _PredictPageState extends State<PredictPage> {
                     onPressed: () async {
                       switch (listedValue) {
                         case 'BTC':
-                          print('hello');
-                          fetchAllRequest(context);
+                          fetchAllRequest();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return PredictResultPage();
+                            }),
+                          );
+                          break;
+                        case 'ETH':
+                          fetchEthRequest();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return PredictResultPageEth();
+                            }),
+                          );
+                          break;
+                        case 'PAXG':
+                          fetchEthRequest();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return PredictResultPagePaxg();
+                            }),
+                          );
+                          break;
+                        case 'SOL':
+                          fetchEthRequest();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return PredictResultPageSol();
+                            }),
+                          );
+                          break;
+                        case 'YFI':
+                          fetchEthRequest();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return PredictResultPageYfi();
+                            }),
+                          );
                           break;
                         default:
                       }
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return PredictResultPage();
-                        }),
-                      );
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) {
+                      //     return PredictResultPage();
+                      //   }),
+                      // );
                     },
                   ),
                 ),

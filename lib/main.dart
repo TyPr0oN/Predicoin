@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/provider/predictFeed.dart';
 import 'package:predicoin/provider/coinBtc.dart';
+import 'package:predicoin/provider/predictFeedETH.dart';
+import 'package:predicoin/provider/predictFeedPAXG.dart';
+import 'package:predicoin/provider/predictFeedSOL.dart';
+import 'package:predicoin/provider/predictFeedYFI.dart';
 import 'package:predicoin/screens/Background.dart';
 import 'package:provider/provider.dart';
 
@@ -14,8 +18,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (ctx) => PredictBtcFeed()),
-        ChangeNotifierProvider(create: (ctx) => CoinBtc()),
+        ChangeNotifierProvider<PredictBtcFeed>(
+            create: (ctx) => PredictBtcFeed()),
+        ChangeNotifierProvider<CoinBtc>(create: (ctx) => CoinBtc()),
+        ChangeNotifierProvider<PredictEthFeed>(
+            create: (ctx) => PredictEthFeed()),
+        ChangeNotifierProvider<PredictPaxgFeed>(
+            create: (ctx) => PredictPaxgFeed()),
+        ChangeNotifierProvider<PredictSolFeed>(
+            create: (ctx) => PredictSolFeed()),
+        ChangeNotifierProvider<PredictYfiFeed>(
+            create: (ctx) => PredictYfiFeed()),
       ],
       child: MaterialApp(
         title: 'Easy Bartering',
