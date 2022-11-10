@@ -36,13 +36,13 @@ class BackgroundScreen extends StatelessWidget {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) {
-                      return LoginPage();
+                      // return LoginPage();
+                      return HomePage();
                     }),
                   );
                 },
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
                   backgroundColor: MaterialStateProperty.all(Color(0xff2D3035)),
                 ),
                 child: const Text(
