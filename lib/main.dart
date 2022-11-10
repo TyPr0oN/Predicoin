@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:predicoin/provider/backtestBtc.dart';
 import 'package:predicoin/provider/predictFeed.dart';
 import 'package:predicoin/provider/coinBtc.dart';
 import 'package:predicoin/provider/predictFeedETH.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
             create: (ctx) => PredictSolFeed()),
         ChangeNotifierProvider<PredictYfiFeed>(
             create: (ctx) => PredictYfiFeed()),
+        ChangeNotifierProvider<BacktestBtc>(create: (ctx) => BacktestBtc()),
       ],
       child: MaterialApp(
         title: 'Easy Bartering',
