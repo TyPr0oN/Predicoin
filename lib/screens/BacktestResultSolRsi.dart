@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:predicoin/provider/coinSol.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/asset/priceChart.dart';
@@ -9,42 +10,41 @@ import 'package:predicoin/Widget/lnChart.dart';
 import 'package:predicoin/widget/markerChart.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/backtestBtc.dart';
-import '../provider/coinBtc.dart';
+import '../provider/backtestSol.dart';
 
-class BacktestResultPage extends StatefulWidget {
-  const BacktestResultPage({Key? key, required this.investresult})
+class BacktestResultSolRsiPage extends StatefulWidget {
+  const BacktestResultSolRsiPage({Key? key, required this.investresultRsi})
       : super(key: key);
-  final int investresult;
+  final int investresultRsi;
   @override
   _BacktestResultPageState createState() =>
-      _BacktestResultPageState(investresult: investresult);
+      _BacktestResultPageState(investresult: investresultRsi);
 }
 
-class _BacktestResultPageState extends State<BacktestResultPage> {
-  File? backtestBtc;
+class _BacktestResultPageState extends State<BacktestResultSolRsiPage> {
+  File? backtestSol;
   _BacktestResultPageState({required this.investresult});
   final int investresult;
 
-  Future<File?> getBacktestBtcPlot() async {
+  Future<File?> getBacktestSolPlot() async {
     try {
-      backtestBtc =
-          await Provider.of<BacktestBtc>(context, listen: false).fetchRequest();
+      backtestSol =
+          await Provider.of<BacktestSol>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
-    return backtestBtc;
+    return backtestSol;
   }
 
-  dynamic btcInfo = '';
+  dynamic SolInfo = '';
   String postInvestResult = '';
   Future<String> postInvest(investValue) async {
     try {
-      postInvestResult = await Provider.of<BacktestBtc>(context, listen: false)
-          .sendInvestBtcSma(investment_value: investValue);
-      btcInfo =
-          await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
-      print('hellotry');
+      postInvestResult = await Provider.of<BacktestSol>(context, listen: false)
+          .sendInvestSolRsi(investment_value: investValue);
+      SolInfo =
+          await Provider.of<CoinSol>(context, listen: false).fetchRequest();
+      print('hellotry from RSI sol');
       print(postInvestResult);
     } catch (err) {
       print(err);
@@ -107,7 +107,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(1),
                                       child: Text(
-                                        'BTC',
+                                        'SOL',
                                         style: TextStyle(
                                             fontFamily: 'Ruda',
                                             fontSize: 26,
@@ -120,7 +120,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(1),
                                       child: Text(
-                                        '${double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}' +
+                                        '${double.parse((SolInfo[0]['${SolInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}' +
                                             " USD ",
                                         style: TextStyle(
                                             fontFamily: 'Ruda',
@@ -134,7 +134,6 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                             ],
                           ),
                           Container(
-                            height: 225,
                             width: MediaQuery.of(context).size.width,
                             child: Column(
                               children: [
@@ -145,7 +144,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                   maxScale: 4,
                                   //constrained: false,
                                   child: new Image.network(
-                                    'http://10.0.2.2:8000/btc_sma_plot',
+                                    'http://10.0.2.2:8000/sol_rsi_plot',
                                     // width: 400,
                                     // height: 400,
                                     fit: BoxFit.cover,
@@ -230,7 +229,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: Text(
                                   "Maximum Drawdown : " +
-                                      '${(double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['Max_dd']).toString()) * 100).toStringAsFixed(2)}' +
+                                      '${(double.parse((SolInfo[0]['${SolInfo[0].length - 1}']['Max_dd']).toString()) * 100).toStringAsFixed(2)}' +
                                       " % ",
                                   style: TextStyle(
                                       fontFamily: 'Ruda',

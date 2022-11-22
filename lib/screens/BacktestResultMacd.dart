@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:predicoin/provider/coinBtc.dart';
+import 'package:predicoin/provider/coinEth.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/asset/priceChart.dart';
@@ -10,18 +12,17 @@ import 'package:predicoin/widget/markerChart.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/backtestBtc.dart';
-import '../provider/coinBtc.dart';
 
-class BacktestResultPage extends StatefulWidget {
-  const BacktestResultPage({Key? key, required this.investresult})
+class BacktestResultMacdPage extends StatefulWidget {
+  const BacktestResultMacdPage({Key? key, required this.investresultMacd})
       : super(key: key);
-  final int investresult;
+  final int investresultMacd;
   @override
   _BacktestResultPageState createState() =>
-      _BacktestResultPageState(investresult: investresult);
+      _BacktestResultPageState(investresult: investresultMacd);
 }
 
-class _BacktestResultPageState extends State<BacktestResultPage> {
+class _BacktestResultPageState extends State<BacktestResultMacdPage> {
   File? backtestBtc;
   _BacktestResultPageState({required this.investresult});
   final int investresult;
@@ -36,15 +37,15 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
     return backtestBtc;
   }
 
-  dynamic btcInfo = '';
+  dynamic btcinfo = '';
   String postInvestResult = '';
   Future<String> postInvest(investValue) async {
     try {
       postInvestResult = await Provider.of<BacktestBtc>(context, listen: false)
-          .sendInvestBtcSma(investment_value: investValue);
-      btcInfo =
+          .sendInvestBtcMacd(investment_value: investValue);
+      btcinfo =
           await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
-      print('hellotry');
+      print('hellotry from macd btc');
       print(postInvestResult);
     } catch (err) {
       print(err);
@@ -120,7 +121,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(1),
                                       child: Text(
-                                        '${double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}' +
+                                        '${double.parse((btcinfo[0]['${btcinfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}' +
                                             " USD ",
                                         style: TextStyle(
                                             fontFamily: 'Ruda',
@@ -145,7 +146,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                   maxScale: 4,
                                   //constrained: false,
                                   child: new Image.network(
-                                    'http://10.0.2.2:8000/btc_sma_plot',
+                                    'http://10.0.2.2:8000/btc_macd_plot',
                                     // width: 400,
                                     // height: 400,
                                     fit: BoxFit.cover,
@@ -230,7 +231,7 @@ class _BacktestResultPageState extends State<BacktestResultPage> {
                                 width: MediaQuery.of(context).size.width * 0.9,
                                 child: Text(
                                   "Maximum Drawdown : " +
-                                      '${(double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['Max_dd']).toString()) * 100).toStringAsFixed(2)}' +
+                                      '${(double.parse((btcinfo[0]['${btcinfo[0].length - 1}']['Max_dd']).toString()) * 100).toStringAsFixed(2)}' +
                                       " % ",
                                   style: TextStyle(
                                       fontFamily: 'Ruda',

@@ -43,6 +43,7 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChartEth> {
     return SafeArea(
       child: Scaffold(
         body: SfCartesianChart(
+          legend: Legend(isVisible: true, offset: Offset(0, -65)),
           trackballBehavior: TrackballBehavior(
             enable: true,
             activationMode: ActivationMode.singleTap,
@@ -56,10 +57,12 @@ class _WidgetFinancialChartState extends State<WidgetFinancialChartEth> {
           primaryYAxis: NumericAxis(),
           series: <ChartSeries>[
             LineSeries<ChartData, String>(
+                name: "Original Close",
                 dataSource: chartData,
                 xValueMapper: (ChartData data, _) => data.x,
                 yValueMapper: (ChartData data, _) => data.y),
             LineSeries<ChartDataPredict, String>(
+                name: "Predict Close",
                 dataSource: predictData,
                 xValueMapper: (ChartDataPredict data, _) => data.x,
                 yValueMapper: (ChartDataPredict data, _) => data.y)

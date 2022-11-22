@@ -22,7 +22,8 @@ class _BtcInfoPageState extends State<BtcInfoPage> {
   Future<dynamic> getBtcInfo(BuildContext context) async {
     try {
       //print('hello');
-      btcInfo = await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
+      btcInfo =
+          await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
       // print(btcInfo[0]["0"]['Close'] + 'test');
     } catch (err) {
       print(err);
@@ -40,7 +41,8 @@ class _BtcInfoPageState extends State<BtcInfoPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
           } else {
             return Padding(
               padding: const EdgeInsets.only(),
@@ -54,7 +56,10 @@ class _BtcInfoPageState extends State<BtcInfoPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(1),
-                              child: ElevatedButton.icon(
+                              child: IconButton(
+                                color: Color(0xFFffd030),
+                                iconSize: 35,
+                                icon: const Icon(Icons.chevron_left),
                                 onPressed: () {
                                   Navigator.pushReplacement(
                                     context,
@@ -63,20 +68,16 @@ class _BtcInfoPageState extends State<BtcInfoPage> {
                                     }),
                                   );
                                 },
-                                style: ButtonStyle(
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-                                  backgroundColor: MaterialStateProperty.all(Color(0xFF2D3035)),
-                                ),
-                                icon: Icon(Icons.chevron_left),
-                                label: Text(''),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(1),
                               child: Text(
                                 'BTC',
-                                style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                                style: TextStyle(
+                                    fontFamily: 'Ruda',
+                                    fontSize: 25,
+                                    color: Color(0xFFffd030)),
                               ),
                             ),
                           ],
@@ -89,17 +90,19 @@ class _BtcInfoPageState extends State<BtcInfoPage> {
                               width: MediaQuery.of(context).size.width,
                               child: Column(
                                 children: [
-                                  Expanded(
+                                  Flexible(
                                     child: Container(
-                                      padding: EdgeInsets.only(
-                                        top: 30,
-                                        bottom: 10,
-                                      ),
+                                      padding: EdgeInsets.fromLTRB(1, 30, 15, 10
+                                          // top: 30,
+                                          // bottom: 10,
+                                          ),
                                       // child: AssetPriceChart(
                                       //   lineColor: Colors.blue,
                                       //   coinInfo: btcInfo,
                                       // ),
-                                      child: WidgetBtcPriceChart(coinInfo: btcInfo, lineColor: Colors.blue),
+                                      child: WidgetBtcPriceChart(
+                                          coinInfo: btcInfo,
+                                          lineColor: Colors.blue),
                                     ),
                                   ),
                                 ],

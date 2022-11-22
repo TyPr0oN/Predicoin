@@ -60,7 +60,10 @@ class _PredictResultPageState extends State<PredictResultPage> {
                           children: [
                             Padding(
                               padding: EdgeInsets.all(1),
-                              child: ElevatedButton.icon(
+                              child: IconButton(
+                                color: Colors.white,
+                                iconSize: 35,
+                                icon: const Icon(Icons.chevron_left),
                                 onPressed: () {
                                   Navigator.pushReplacement(
                                     context,
@@ -69,14 +72,6 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                     }),
                                   );
                                 },
-                                style: ButtonStyle(
-                                  // shape: MaterialStateProperty.all(
-                                  //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-                                  backgroundColor: MaterialStateProperty.all(
-                                      Color(0xFF2D3035)),
-                                ),
-                                icon: Icon(Icons.chevron_left),
-                                label: Text(''),
                               ),
                             ),
                             Padding(
@@ -124,7 +119,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                   Expanded(
                                     child: Container(
                                       padding: EdgeInsets.only(
-                                        top: 30,
+                                        top: 15,
                                         bottom: 10,
                                       ),
                                       child: WidgetFinancialChart(
@@ -144,7 +139,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                               child: Padding(
                                 padding: const EdgeInsets.all(1),
                                 child: Text(
-                                  'Next 7 Days prices',
+                                  'Next 5 Days prices',
                                   style: TextStyle(
                                       fontFamily: 'Ruda',
                                       fontSize: 25,
@@ -155,7 +150,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
+                          padding: const EdgeInsets.only(top: 10.0),
                           child: Row(
                             children: [
                               Padding(
@@ -216,30 +211,6 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                         padding: const EdgeInsets.all(1),
                                         child: Text(
                                           '5th Days',
-                                          style: TextStyle(
-                                              fontFamily: 'Ruda',
-                                              fontSize: 20,
-                                              color: Color(0xFFffd030)),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '6th Days',
-                                          style: TextStyle(
-                                              fontFamily: 'Ruda',
-                                              fontSize: 20,
-                                              color: Color(0xFFffd030)),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '7th Days',
                                           style: TextStyle(
                                               fontFamily: 'Ruda',
                                               fontSize: 20,
@@ -315,35 +286,119 @@ class _PredictResultPageState extends State<PredictResultPage> {
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '${double.parse((btcPredict[0][370]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
-                                          style: TextStyle(
-                                              fontFamily: 'Ruda',
-                                              fontSize: 20,
-                                              color: Color(0xFFffd030)),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(1),
-                                        child: Text(
-                                          '${double.parse((btcPredict[0][371]['test_predicted_close']).toString()).toStringAsFixed(2)} USD',
-                                          style: TextStyle(
-                                              fontFamily: 'Ruda',
-                                              fontSize: 20,
-                                              color: Color(0xFFffd030)),
-                                        ),
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                //padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  'R-Square',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 25,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                //padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  '${double.parse((btcPredict[3]['R-Square'] * 100).toString()).toStringAsFixed(2)} %',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 18,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                //padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  'RMSE',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 25,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                //padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  '${double.parse((btcPredict[2]['RMSE']).toString()).toStringAsFixed(2)} ',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 18,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10.0),
+                                //padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  'MAPE',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 25,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Padding(
+                                //padding: const EdgeInsets.only(top: 10.0),
+                                padding: const EdgeInsets.all(1),
+                                child: Text(
+                                  '${double.parse((btcPredict[4]['MAPE'] * 100).toString()).toStringAsFixed(2)} %',
+                                  style: TextStyle(
+                                      fontFamily: 'Ruda',
+                                      fontSize: 18,
+                                      color: Color(0xFFffd030)),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
@@ -358,6 +413,7 @@ class _PredictResultPageState extends State<PredictResultPage> {
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
       centerTitle: true,
+      backgroundColor: Color(0xff1D194B),
       title: Image.asset(
         'assets/logo/predicoin.png',
         height: 37,

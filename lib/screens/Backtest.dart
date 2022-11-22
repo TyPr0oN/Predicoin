@@ -1,10 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:predicoin/provider/backtestEth.dart';
+import 'package:predicoin/provider/backtestPaxg.dart';
+import 'package:predicoin/provider/backtestSol.dart';
 import 'package:predicoin/screens/Home.dart';
 import 'package:predicoin/screens/BacktestResult.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/backtestBtc.dart';
+import 'BacktestResultBb.dart';
+import 'BacktestResultEthBb.dart';
+import 'BacktestResultEthMacd.dart';
+import 'BacktestResultEthRsi.dart';
+import 'BacktestResultEthSma.dart';
+import 'BacktestResultMacd.dart';
+import 'BacktestResultPaxgBb.dart';
+import 'BacktestResultPaxgMacd.dart';
+import 'BacktestResultPaxgRsi.dart';
+import 'BacktestResultPaxgSma.dart';
+import 'BacktestResultRsi.dart';
+import 'BacktestResultSolBb.dart';
+import 'BacktestResultSolMacd.dart';
+import 'BacktestResultSolRsi.dart';
+import 'BacktestResultSolSma.dart';
+import 'BacktestResultYfiBb.dart';
+import 'BacktestResultYfiMacd.dart';
+import 'BacktestResultYfiRsi.dart';
+import 'BacktestResultYfiSma.dart';
 
 class BacktestPage extends StatefulWidget {
   const BacktestPage({Key? key}) : super(key: key);
@@ -17,6 +40,9 @@ class _BacktestPageState extends State<BacktestPage> {
   Future<void> fetchAllRequest() async {
     try {
       await Provider.of<BacktestBtc>(context, listen: false).fetchRequest();
+      await Provider.of<BacktestEth>(context, listen: false).fetchRequest();
+      await Provider.of<BacktestPaxg>(context, listen: false).fetchRequest();
+      await Provider.of<BacktestSol>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
@@ -25,7 +51,8 @@ class _BacktestPageState extends State<BacktestPage> {
   late int investment_value = 0;
   @override
   String? _assetval;
-  List listAssetItem = ["BTC", "ETH", "ADA"];
+  List listAssetItem = ["BTC", "ETH", "PAXG", "SOL", "YFI"];
+  String listedValue = '';
   Widget _buildAssetField() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -53,6 +80,7 @@ class _BacktestPageState extends State<BacktestPage> {
                 },
                 items: listAssetItem.map((valueItem) {
                   return DropdownMenuItem(
+                    onTap: () => listedValue = valueItem,
                     value: valueItem,
                     child: Text(valueItem),
                   );
@@ -65,9 +93,9 @@ class _BacktestPageState extends State<BacktestPage> {
 
   String? _metricval2;
   List listMetricItem2 = [
-    "CANDLESTICK",
-    "GRAPH",
+    "Line",
   ];
+  String listedMetricValue = '';
   Widget _buildMetricField2() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -95,6 +123,7 @@ class _BacktestPageState extends State<BacktestPage> {
                 },
                 items: listMetricItem2.map((valueItem) {
                   return DropdownMenuItem(
+                    onTap: () => listedMetricValue = valueItem,
                     value: valueItem,
                     child: Text(valueItem),
                   );
@@ -107,13 +136,12 @@ class _BacktestPageState extends State<BacktestPage> {
 
   String? _strategiesval;
   List listStrategiesItem = [
-    "Buy and Hold",
-    "Dollar Cost Average",
-    "Maximum Drawdown",
+    "Relative Strength Index",
     "Bollinger Band",
     "Moving Average Convergence Divergence",
     "Simple Moving Average",
   ];
+  String listedStrategicValue = '';
   Widget _buildStrategiesField() {
     return Container(
         width: MediaQuery.of(context).size.width,
@@ -158,6 +186,7 @@ class _BacktestPageState extends State<BacktestPage> {
                 },
                 items: listStrategiesItem.map((valueItem) {
                   return DropdownMenuItem(
+                    onTap: () => listedStrategicValue = valueItem,
                     value: valueItem,
                     child: Text(valueItem),
                   );
@@ -244,28 +273,20 @@ class _BacktestPageState extends State<BacktestPage> {
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(1),
-                            child: ElevatedButton.icon(
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(builder: (context) {
-                                    return HomePage();
-                                  }),
-                                );
-                              },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color(0xFF2D3035)),
-                              ),
-                              icon: Icon(Icons.chevron_left),
-                              label: Text(''),
-                            ),
-                          ),
+                              padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                              child: IconButton(
+                                color: Colors.white,
+                                iconSize: 35,
+                                icon: const Icon(Icons.chevron_left),
+                                onPressed: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return HomePage();
+                                    }),
+                                  );
+                                },
+                              )),
                           Padding(
                             padding: const EdgeInsets.all(1),
                             child: Text(
@@ -280,7 +301,7 @@ class _BacktestPageState extends State<BacktestPage> {
                       ),
                       Container(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 20, left: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 20, 0, 0),
                           child: Text(
                             'Asset',
                             style: TextStyle(
@@ -308,27 +329,15 @@ class _BacktestPageState extends State<BacktestPage> {
                         children: [
                           Container(
                             child: Padding(
-                              padding: const EdgeInsets.only(top: 20, left: 10),
+                              padding: const EdgeInsets.fromLTRB(10, 20, 0, 0
+                                  //top: 20, left: 10
+                                  ),
                               child: Text(
                                 'STRATEGIES',
                                 style: TextStyle(
                                     fontFamily: 'Ruda',
                                     fontSize: 25,
                                     color: Color(0xFFffd030)),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            child: Padding(
-                              padding: EdgeInsets.only(top: 20),
-                              child: IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    compareStrategies = true;
-                                  });
-                                },
-                                icon: Icon(Icons.add),
-                                color: Colors.yellow,
                               ),
                             ),
                           ),
@@ -343,7 +352,9 @@ class _BacktestPageState extends State<BacktestPage> {
                         visible: FUND,
                         child: Container(
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 10),
+                            padding: const EdgeInsets.fromLTRB(10, 15, 0, 10
+                                //top: 20, left: 10
+                                ),
                             child: Text(
                               'FUND',
                               style: TextStyle(
@@ -359,11 +370,16 @@ class _BacktestPageState extends State<BacktestPage> {
                         child: Container(
                           width: MediaQuery.of(context).size.width,
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(10, 10, 10, 8),
+                            padding: EdgeInsets.fromLTRB(10, 10, 10, 100),
                             child: TextFormField(
+                              keyboardType: TextInputType.number,
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly
+                              ],
                               onChanged: ((value) =>
                                   investment_value = int.parse(value)),
                               decoration: InputDecoration(
+                                hintText: "0",
                                 filled: true,
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
@@ -460,9 +476,8 @@ class _BacktestPageState extends State<BacktestPage> {
                 ),
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tightFor(
-                    height: 40, //52
-                    width: 90, //MediaQuery.of(context).size.width
-                  ),
+                      height: 50, //52
+                      width: MediaQuery.of(context).size.width),
                   child: TextButton(
                     child: Text(
                       "Create",
@@ -474,16 +489,252 @@ class _BacktestPageState extends State<BacktestPage> {
                           borderRadius: BorderRadius.circular(10)),
                     ),
                     onPressed: () {
+                      switch (listedValue) {
+                        case 'BTC':
+                          switch (listedMetricValue) {
+                            case 'Line':
+                              switch (listedStrategicValue) {
+                                case 'Simple Moving Average':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultPage(
+                                        investresult: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Moving Average Convergence Divergence':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultMacdPage(
+                                        investresultMacd: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Relative Strength Index':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultRsiPage(
+                                        investresultRsi: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Bollinger Band':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultBbPage(
+                                        investresultBb: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                              }
+                              break;
+                          }
+                          break;
+                        case 'ETH':
+                          switch (listedMetricValue) {
+                            case 'Line':
+                              switch (listedStrategicValue) {
+                                case 'Simple Moving Average':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultEthPage(
+                                        investresult: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Moving Average Convergence Divergence':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultEthMacdPage(
+                                        investresultMacd: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Relative Strength Index':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultEthRsiPage(
+                                        investresultRsi: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Bollinger Band':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultEthBbPage(
+                                        investresultBb: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                              }
+                              break;
+                          }
+                          break;
+                        case 'PAXG':
+                          switch (listedMetricValue) {
+                            case 'Line':
+                              switch (listedStrategicValue) {
+                                case 'Simple Moving Average':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultPaxgPage(
+                                        investresult: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Moving Average Convergence Divergence':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultPaxgMacdPage(
+                                        investresultMacd: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Relative Strength Index':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultPaxgRsiPage(
+                                        investresultRsi: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Bollinger Band':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultPaxgBbPage(
+                                        investresultBb: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                              }
+                              break;
+                          }
+                          break;
+                        case 'SOL':
+                          switch (listedMetricValue) {
+                            case 'Line':
+                              switch (listedStrategicValue) {
+                                case 'Simple Moving Average':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultSolPage(
+                                        investresult: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Moving Average Convergence Divergence':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultSolMacdPage(
+                                        investresultMacd: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Relative Strength Index':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultSolRsiPage(
+                                        investresultRsi: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Bollinger Band':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultSolBbPage(
+                                        investresultBb: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                              }
+                              break;
+                          }
+                          break;
+                        case 'YFI':
+                          switch (listedMetricValue) {
+                            case 'Line':
+                              switch (listedStrategicValue) {
+                                case 'Simple Moving Average':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultYfiPage(
+                                        investresult: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Moving Average Convergence Divergence':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultYfiMacdPage(
+                                        investresultMacd: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Relative Strength Index':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultYfiRsiPage(
+                                        investresultRsi: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                                case 'Bollinger Band':
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) {
+                                      return BacktestResultYfiBbPage(
+                                        investresultBb: investment_value,
+                                      );
+                                    }),
+                                  );
+                                  break;
+                              }
+                              break;
+                          }
+                          break;
+
+                        default:
+                      }
                       //postInvest(investment_value);
                       //print(postInvest);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return BacktestResultPage(
-                            investresult: investment_value,
-                          );
-                        }),
-                      );
                     },
                   ),
                 ),

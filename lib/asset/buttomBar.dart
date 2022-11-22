@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:predicoin/screens/homeBody.dart';
 import 'package:predicoin/screens/Backtest.dart';
 import 'package:predicoin/screens/Predict.dart';
+import 'package:predicoin/screens/knowledge.dart';
 
 class buttomBar extends StatefulWidget {
   const buttomBar({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class _buttomBarState extends State<buttomBar> {
   int _selectedIndex = 0;
   List<Widget> pageList = <Widget>[
     HomeBodyPage(),
+    KnowledgePage(),
     BacktestPage(),
     PredictPage(),
   ];
@@ -36,6 +38,8 @@ class _buttomBarState extends State<buttomBar> {
         iconSize: 40,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.book_rounded), label: 'Knowledge'),
           BottomNavigationBarItem(
               icon: Icon(Icons.multiline_chart), label: 'BackTest'),
           BottomNavigationBarItem(

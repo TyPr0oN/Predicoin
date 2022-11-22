@@ -20,7 +20,8 @@ class _EthInfoPageState extends State<EthInfoPage> {
   dynamic ethInfo = '';
   Future<dynamic> getEthInfo(BuildContext context) async {
     try {
-      ethInfo = await Provider.of<CoinEth>(context, listen: false).fetchRequest();
+      ethInfo =
+          await Provider.of<CoinEth>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
@@ -37,7 +38,8 @@ class _EthInfoPageState extends State<EthInfoPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
           } else {
             return Padding(
               padding: const EdgeInsets.only(),
@@ -51,7 +53,10 @@ class _EthInfoPageState extends State<EthInfoPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(1),
-                              child: ElevatedButton.icon(
+                              child: IconButton(
+                                color: Color(0xFFffd030),
+                                iconSize: 35,
+                                icon: const Icon(Icons.chevron_left),
                                 onPressed: () {
                                   Navigator.pushReplacement(
                                     context,
@@ -60,18 +65,16 @@ class _EthInfoPageState extends State<EthInfoPage> {
                                     }),
                                   );
                                 },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0xFF2D3035)),
-                                ),
-                                icon: Icon(Icons.chevron_left),
-                                label: Text(''),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(1),
                               child: Text(
                                 'ETH',
-                                style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                                style: TextStyle(
+                                    fontFamily: 'Ruda',
+                                    fontSize: 25,
+                                    color: Color(0xFFffd030)),
                               ),
                             ),
                           ],
@@ -86,11 +89,13 @@ class _EthInfoPageState extends State<EthInfoPage> {
                                 children: [
                                   Expanded(
                                     child: Container(
-                                      padding: EdgeInsets.only(
-                                        top: 30,
-                                        bottom: 10,
-                                      ),
-                                      child: WidgetEthPriceChart(coinInfo: ethInfo, lineColor: Colors.blue),
+                                      padding: EdgeInsets.fromLTRB(1, 30, 15, 10
+                                          // top: 30,
+                                          // bottom: 10,
+                                          ),
+                                      child: WidgetEthPriceChart(
+                                          coinInfo: ethInfo,
+                                          lineColor: Colors.blue),
                                     ),
                                   ),
                                 ],

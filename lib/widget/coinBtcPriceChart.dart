@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:predicoin/widget/financialCharts.dart';
+import 'package:intl/intl.dart';
 
 class WidgetBtcPriceChart extends StatefulWidget {
   const WidgetBtcPriceChart({
@@ -30,9 +31,12 @@ class _WidgetBtcPriceChartState extends State<WidgetBtcPriceChart> {
     // print(coinInfo[0]);
     for (var i = 0; i < widget.coinInfo[0].length; i++) {
       // print((widget.coinInfo[0][i.toString()]['Close'].toString()));
-      yValues.add(double.parse(widget.coinInfo[0][i.toString()]['Close'].toString()));
+      yValues.add(
+          double.parse(widget.coinInfo[0][i.toString()]['Close'].toString()));
       // print((widget.coinInfo[0][i.toString()]['Date'].toString()));
-      dayValues.add((widget.coinInfo[0][i.toString()]['Date'].toString()));
+      dayValues.add((DateFormat("yyyy")
+          .format(DateTime.parse(widget.coinInfo[0][i.toString()]['Date']))
+          .toString()));
     }
 
     super.initState();
@@ -84,8 +88,12 @@ class _WidgetBtcPriceChartState extends State<WidgetBtcPriceChart> {
     const style = TextStyle(color: Colors.white, fontSize: 10);
 
     return SideTitleWidget(
+      angle: 0,
       axisSide: meta.axisSide,
-      child: Text(dayValues[value.toInt()], style: style),
+      child: Text(
+        dayValues[value.toInt()],
+        style: style,
+      ),
     );
   }
 
@@ -112,7 +120,7 @@ class _WidgetBtcPriceChartState extends State<WidgetBtcPriceChart> {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Close ' + FlSpot.y.toString(),
+                      text: 'Close ' + FlSpot.y.toStringAsFixed(2),
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -124,12 +132,18 @@ class _WidgetBtcPriceChartState extends State<WidgetBtcPriceChart> {
       );
   FlTitlesData get titlesData => FlTitlesData(
         bottomTitles: AxisTitles(
-            sideTitles:
-                SideTitles(showTitles: true, reservedSize: 18, interval: 300, getTitlesWidget: bottomTitleWidget)),
+            sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 20,
+                interval: 350,
+                getTitlesWidget: bottomTitleWidget)),
         rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
         topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        leftTitles:
-            AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 30, getTitlesWidget: leftTitleWidget)),
+        leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 30,
+                getTitlesWidget: leftTitleWidget)),
       );
   FlGridData get gridData => FlGridData(show: false);
   FlBorderData get borderData => FlBorderData(show: false);

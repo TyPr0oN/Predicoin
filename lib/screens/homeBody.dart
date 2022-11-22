@@ -31,11 +31,16 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
   Future<dynamic> getBtcInfo(BuildContext context) async {
     try {
       //print('hello');
-      btcInfo = await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
-      ethInfo = await Provider.of<CoinEth>(context, listen: false).fetchRequest();
-      solInfo = await Provider.of<CoinSol>(context, listen: false).fetchRequest();
-      yfiInfo = await Provider.of<CoinYfi>(context, listen: false).fetchRequest();
-      paxgInfo = await Provider.of<CoinPaxg>(context, listen: false).fetchRequest();
+      btcInfo =
+          await Provider.of<CoinBtc>(context, listen: false).fetchRequest();
+      ethInfo =
+          await Provider.of<CoinEth>(context, listen: false).fetchRequest();
+      solInfo =
+          await Provider.of<CoinSol>(context, listen: false).fetchRequest();
+      yfiInfo =
+          await Provider.of<CoinYfi>(context, listen: false).fetchRequest();
+      paxgInfo =
+          await Provider.of<CoinPaxg>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
@@ -54,7 +59,8 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
           builder: (context, AsyncSnapshot snapshot) {
             if (!snapshot.hasData) {
               return const Center(
-                  child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+                  child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
             } else {
               return Padding(
                 padding: const EdgeInsets.only(left: 14.0, right: 14, top: 20),
@@ -65,36 +71,12 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Text(
                         "Crypto Coin",
-                        style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Column(
-                    //   mainAxisSize: MainAxisSize.min,
-                    //   children: [
-                    //     Container(
-                    //       width: MediaQuery.of(context).size.width,
-                    //       child: CoinFillter(
-                    //         onPressed: () {},
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.end,
-                    //   children: [
-                    //     Text(
-                    //       "Price",
-                    //       style: TextStyle(color: Colors.white),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(left: 80.0),
-                    //       child: Text(
-                    //         "Volume",
-                    //         style: TextStyle(color: Colors.white),
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
                     Row(
                       children: [
                         //coin list on homepage
@@ -106,7 +88,9 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                         ),
                         Container(
                           width: 100,
-                          margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                          margin: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width * 0.11),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
@@ -166,38 +150,54 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                               onPressed: () {
                                                 Navigator.pushReplacement(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) {
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
                                                     return BtcInfoPage();
                                                   }),
                                                 );
                                               },
-                                              child: Text('BTC', style: TextStyle(fontSize: 18, color: Colors.white)),
+                                              child: Text('BTC',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white)),
                                             )),
                                         Container(
                                           width: 106,
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.11),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
                                                   child: Text(
                                                       '${double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}',
-                                                      style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.white))),
                                             ],
                                           ),
                                         ),
                                         Container(
                                           width: 100,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(right: 8),
+                                                padding: const EdgeInsets.only(
+                                                    right: 8),
                                                 child: Container(
                                                     child: Text(
                                                         '${(double.parse((btcInfo[0]['${btcInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
-                                                        style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.white))),
                                               ),
                                             ],
                                           ),
@@ -235,39 +235,55 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                               onPressed: () {
                                                 Navigator.pushReplacement(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) {
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
                                                     return EthInfoPage();
                                                   }),
                                                 );
                                               },
-                                              child: Text('ETH', style: TextStyle(fontSize: 18, color: Colors.white)),
+                                              child: Text('ETH',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white)),
                                             )),
                                         Container(
                                           width: 106,
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.11),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
                                                   child: Text(
                                                       '${double.parse((ethInfo[0]['${ethInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}',
-                                                      style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.white))),
                                             ],
                                           ),
                                         ),
                                         Container(
                                           width: 100,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(right: 8),
+                                                padding: const EdgeInsets.only(
+                                                    right: 8),
                                                 child: Container(
                                                     width: 63,
                                                     child: Text(
                                                         '${(double.parse((ethInfo[0]['${ethInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
-                                                        style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.white))),
                                               ),
                                             ],
                                           ),
@@ -305,38 +321,54 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                               onPressed: () {
                                                 Navigator.pushReplacement(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) {
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
                                                     return SolInfoPage();
                                                   }),
                                                 );
                                               },
-                                              child: Text('SOL', style: TextStyle(fontSize: 18, color: Colors.white)),
+                                              child: Text('SOL',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white)),
                                             )),
                                         Container(
                                           width: 106,
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.11),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
                                                   child: Text(
                                                       '${double.parse((solInfo[0]['${solInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}',
-                                                      style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.white))),
                                             ],
                                           ),
                                         ),
                                         Container(
                                           width: 100,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(right: 8),
+                                                padding: const EdgeInsets.only(
+                                                    right: 8),
                                                 child: Container(
                                                     child: Text(
                                                         '${(double.parse((solInfo[0]['${solInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
-                                                        style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.white))),
                                               ),
                                             ],
                                           ),
@@ -369,7 +401,8 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                     child: Row(
                                       children: [
                                         Column(
-                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
                                           children: [
                                             Container(
                                                 height: 50,
@@ -377,40 +410,56 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                                   onPressed: () {
                                                     Navigator.pushReplacement(
                                                       context,
-                                                      MaterialPageRoute(builder: (context) {
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
                                                         return YfiInfoPage();
                                                       }),
                                                     );
                                                   },
-                                                  child: Text('YFI', style: TextStyle(fontSize: 18, color: Colors.white)),
+                                                  child: Text('YFI',
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color: Colors.white)),
                                                 )),
                                           ],
                                         ),
                                         Container(
                                           width: 106,
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.11),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
                                                   child: Text(
                                                       '${double.parse((yfiInfo[0]['${yfiInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}',
-                                                      style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.white))),
                                             ],
                                           ),
                                         ),
                                         Container(
                                           width: 100,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(right: 8),
+                                                padding: const EdgeInsets.only(
+                                                    right: 8),
                                                 child: Container(
                                                     child: Text(
                                                         '${(double.parse((yfiInfo[0]['${yfiInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
-                                                        style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.white))),
                                               ),
                                             ],
                                           ),
@@ -448,38 +497,54 @@ class _HomeBodyPageState extends State<HomeBodyPage> {
                                               onPressed: () {
                                                 Navigator.pushReplacement(
                                                   context,
-                                                  MaterialPageRoute(builder: (context) {
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
                                                     return PaxgInfoPage();
                                                   }),
                                                 );
                                               },
-                                              child: Text('PAXG', style: TextStyle(fontSize: 18, color: Colors.white)),
+                                              child: Text('PAXG',
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      color: Colors.white)),
                                             )),
                                         Container(
                                           width: 106,
-                                          margin:
-                                              EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.11),
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.11),
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Container(
                                                   child: Text(
                                                       '${double.parse((paxgInfo[0]['${paxgInfo[0].length - 1}']['Close']).toString()).toStringAsFixed(2)}',
-                                                      style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                      style: TextStyle(
+                                                          fontSize: 18,
+                                                          color:
+                                                              Colors.white))),
                                             ],
                                           ),
                                         ),
                                         Container(
                                           width: 100,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsets.only(right: 8),
+                                                padding: const EdgeInsets.only(
+                                                    right: 8),
                                                 child: Container(
                                                     child: Text(
                                                         '${(double.parse((paxgInfo[0]['${paxgInfo[0].length - 1}']['24hchange']).toString()) * 100).toStringAsFixed(2)} %',
-                                                        style: TextStyle(fontSize: 18, color: Colors.white))),
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            color:
+                                                                Colors.white))),
                                               ),
                                             ],
                                           ),

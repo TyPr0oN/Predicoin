@@ -115,8 +115,7 @@ class _PredictPageState extends State<PredictPage> {
 
   String? _metricval2;
   List listMetricItem2 = [
-    "CANDLESTICK",
-    "GRAPH",
+    "Line",
   ];
   Widget _buildMetricField2() {
     return Container(
@@ -171,8 +170,11 @@ class _PredictPageState extends State<PredictPage> {
                       Row(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(1),
-                            child: ElevatedButton.icon(
+                            padding: EdgeInsets.fromLTRB(2, 0, 2, 0),
+                            child: IconButton(
+                              color: Colors.white,
+                              iconSize: 35,
+                              icon: const Icon(Icons.chevron_left),
                               onPressed: () {
                                 Navigator.pushReplacement(
                                   context,
@@ -181,14 +183,6 @@ class _PredictPageState extends State<PredictPage> {
                                   }),
                                 );
                               },
-                              style: ButtonStyle(
-                                // shape: MaterialStateProperty.all(
-                                //     RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-                                backgroundColor: MaterialStateProperty.all(
-                                    Color(0xFF2D3035)),
-                              ),
-                              icon: Icon(Icons.chevron_left),
-                              label: Text(''),
                             ),
                           ),
                           Padding(
@@ -243,7 +237,7 @@ class _PredictPageState extends State<PredictPage> {
                 ),
                 child: ConstrainedBox(
                   constraints: BoxConstraints.tightFor(
-                    height: 52, //40
+                    height: 50, //40
                     width: MediaQuery.of(context).size.width, //90
                   ),
                   child: TextButton(

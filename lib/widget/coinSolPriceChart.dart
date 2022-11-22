@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class WidgetSolPriceChart extends StatefulWidget {
   const WidgetSolPriceChart({
@@ -22,8 +23,11 @@ class _WidgetSolPriceChartState extends State<WidgetSolPriceChart> {
   @override
   void initState() {
     for (var i = 0; i < widget.coinInfo[0].length; i++) {
-      yValues.add(double.parse(widget.coinInfo[0][i.toString()]['Close'].toString()));
-      dayValues.add((widget.coinInfo[0][i.toString()]['Date'].toString()));
+      yValues.add(
+          double.parse(widget.coinInfo[0][i.toString()]['Close'].toString()));
+      dayValues.add((DateFormat("yyyy")
+          .format(DateTime.parse(widget.coinInfo[0][i.toString()]['Date']))
+          .toString()));
     }
     super.initState();
   }
@@ -102,7 +106,8 @@ class _WidgetSolPriceChartState extends State<WidgetSolPriceChart> {
                   ),
                   children: [
                     TextSpan(
-                      text: 'Close ' + '${double.parse(FlSpot.y.toString()).toStringAsFixed(7)}',
+                      text: 'Close ' +
+                          '${double.parse(FlSpot.y.toString()).toStringAsFixed(7)}',
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -114,12 +119,18 @@ class _WidgetSolPriceChartState extends State<WidgetSolPriceChart> {
       );
   FlTitlesData get titlesData => FlTitlesData(
         bottomTitles: AxisTitles(
-            sideTitles:
-                SideTitles(showTitles: true, reservedSize: 18, interval: 190, getTitlesWidget: bottomTitleWidget)),
+            sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 20,
+                interval: 350,
+                getTitlesWidget: bottomTitleWidget)),
         rightTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
         topTitles: AxisTitles(sideTitles: SideTitles(showTitles: false)),
-        leftTitles:
-            AxisTitles(sideTitles: SideTitles(showTitles: true, reservedSize: 30, getTitlesWidget: leftTitleWidget)),
+        leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+                showTitles: true,
+                reservedSize: 30,
+                getTitlesWidget: leftTitleWidget)),
       );
   FlGridData get gridData => FlGridData(show: false);
   FlBorderData get borderData => FlBorderData(show: false);

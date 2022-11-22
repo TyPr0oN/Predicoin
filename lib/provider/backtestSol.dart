@@ -4,19 +4,19 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-class BacktestBtc with ChangeNotifier {
+class BacktestSol with ChangeNotifier {
   var publicAPI = "http://10.0.2.2:8000";
 
   // var invest = {
   //   'investment_value':
   // }
   String investResult = '';
-  Future<String> sendInvestBtcSma({int? investment_value}) async {
+  Future<String> sendInvestSolSma({int? investment_value}) async {
     print('hello');
     Map<String, dynamic> formData = {'investment_value': investment_value};
 
     final response = await Dio()
-        .post('http://10.0.2.2:8000/btc_sma_post', queryParameters: formData);
+        .post('http://10.0.2.2:8000/sol_sma_post', queryParameters: formData);
     print(response);
     var res = json.decode(response.toString());
     print(res);
@@ -26,27 +26,27 @@ class BacktestBtc with ChangeNotifier {
     return investResult;
   }
 
-  File? backtestBtc;
+  File? backtestSol;
   Future<File?> fetchRequest() async {
     try {
-      final res = await Dio().get(publicAPI + '/btc_sma_plot');
-      backtestBtc = res.data;
+      final res = await Dio().get(publicAPI + '/sol_sma_plot');
+      backtestSol = res.data;
     } on DioError catch (e) {
       print('error');
       print(e);
       print(e.response);
     }
     print('he');
-    return backtestBtc;
+    return backtestSol;
   }
 
   String investResultMacd = '';
-  Future<String> sendInvestBtcMacd({int? investment_value}) async {
+  Future<String> sendInvestSolMacd({int? investment_value}) async {
     print('hello');
     Map<String, dynamic> formData = {'investment_value': investment_value};
 
     final response = await Dio()
-        .post('http://10.0.2.2:8000/btc_macd', queryParameters: formData);
+        .post('http://10.0.2.2:8000/sol_macd', queryParameters: formData);
     print(response);
     var res = json.decode(response.toString());
     print(res);
@@ -57,12 +57,12 @@ class BacktestBtc with ChangeNotifier {
   }
 
   String investResultRsi = '';
-  Future<String> sendInvestBtcRsi({int? investment_value}) async {
+  Future<String> sendInvestSolRsi({int? investment_value}) async {
     print('hello');
     Map<String, dynamic> formData = {'investment_value': investment_value};
 
     final response = await Dio()
-        .post('http://10.0.2.2:8000/btc_rsi_post', queryParameters: formData);
+        .post('http://10.0.2.2:8000/sol_rsi_post', queryParameters: formData);
     print(response);
     var res = json.decode(response.toString());
     print(res);
@@ -73,12 +73,12 @@ class BacktestBtc with ChangeNotifier {
   }
 
   String investResultBb = '';
-  Future<String> sendInvestBtcBb({int? investment_value}) async {
+  Future<String> sendInvestSolBb({int? investment_value}) async {
     print('hello');
     Map<String, dynamic> formData = {'investment_value': investment_value};
 
     final response = await Dio()
-        .post('http://10.0.2.2:8000/btc_bb_post', queryParameters: formData);
+        .post('http://10.0.2.2:8000/sol_bb_post', queryParameters: formData);
     print(response);
     var res = json.decode(response.toString());
     print(res);

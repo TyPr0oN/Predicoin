@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:predicoin/provider/backtestBtc.dart';
+import 'package:predicoin/provider/backtestEth.dart';
+import 'package:predicoin/provider/backtestPaxg.dart';
+import 'package:predicoin/provider/backtestSol.dart';
+import 'package:predicoin/provider/backtestYfi.dart';
 import 'package:predicoin/provider/coinEth.dart';
 import 'package:predicoin/provider/coinSol.dart';
 import 'package:predicoin/provider/coinYfi.dart';
@@ -35,6 +39,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<PredictYfiFeed>(
             create: (ctx) => PredictYfiFeed()),
         ChangeNotifierProvider<BacktestBtc>(create: (ctx) => BacktestBtc()),
+        ChangeNotifierProvider<BacktestEth>(create: (ctx) => BacktestEth()),
+        ChangeNotifierProvider<BacktestPaxg>(create: (ctx) => BacktestPaxg()),
+        ChangeNotifierProvider<BacktestSol>(create: (ctx) => BacktestSol()),
+        ChangeNotifierProvider<BacktestYfi>(create: (ctx) => BacktestYfi()),
         ChangeNotifierProvider<CoinEth>(create: (ctx) => CoinEth()),
         ChangeNotifierProvider<CoinSol>(create: (ctx) => CoinSol()),
         ChangeNotifierProvider<CoinYfi>(create: (ctx) => CoinYfi()),

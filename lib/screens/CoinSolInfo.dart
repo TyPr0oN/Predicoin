@@ -18,7 +18,8 @@ class _SolInfoPageState extends State<SolInfoPage> {
   dynamic solInfo = '';
   Future<dynamic> getSolInfo(BuildContext context) async {
     try {
-      solInfo = await Provider.of<CoinSol>(context, listen: false).fetchRequest();
+      solInfo =
+          await Provider.of<CoinSol>(context, listen: false).fetchRequest();
     } catch (err) {
       print(err);
     }
@@ -35,7 +36,8 @@ class _SolInfoPageState extends State<SolInfoPage> {
         builder: (context, AsyncSnapshot snapshot) {
           if (!snapshot.hasData) {
             return const Center(
-                child: CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
+                child: CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white)));
           } else {
             return Padding(
               padding: const EdgeInsets.only(),
@@ -49,7 +51,10 @@ class _SolInfoPageState extends State<SolInfoPage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.all(1),
-                              child: ElevatedButton.icon(
+                              child: IconButton(
+                                color: Color(0xFFffd030),
+                                iconSize: 35,
+                                icon: const Icon(Icons.chevron_left),
                                 onPressed: () {
                                   Navigator.pushReplacement(
                                     context,
@@ -58,18 +63,16 @@ class _SolInfoPageState extends State<SolInfoPage> {
                                     }),
                                   );
                                 },
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(Color(0xFF2D3035)),
-                                ),
-                                icon: Icon(Icons.chevron_left),
-                                label: Text(''),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(1),
                               child: Text(
                                 'SOL',
-                                style: TextStyle(fontFamily: 'Ruda', fontSize: 25, color: Color(0xFFffd030)),
+                                style: TextStyle(
+                                    fontFamily: 'Ruda',
+                                    fontSize: 25,
+                                    color: Color(0xFFffd030)),
                               ),
                             ),
                           ],
@@ -84,11 +87,13 @@ class _SolInfoPageState extends State<SolInfoPage> {
                                 children: [
                                   Expanded(
                                     child: Container(
-                                      padding: EdgeInsets.only(
-                                        top: 30,
-                                        bottom: 10,
-                                      ),
-                                      child: WidgetSolPriceChart(coinInfo: solInfo, lineColor: Colors.blue),
+                                      padding: EdgeInsets.fromLTRB(1, 30, 15, 10
+                                          // top: 30,
+                                          // bottom: 10,
+                                          ),
+                                      child: WidgetSolPriceChart(
+                                          coinInfo: solInfo,
+                                          lineColor: Colors.blue),
                                     ),
                                   ),
                                 ],
